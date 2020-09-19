@@ -19,6 +19,7 @@ body {
   display: grid;
   place-items: center;
   font-family: 'Grandstander', cursive;
+  text-align: center;
 }
 h1 {
   background: White;
