@@ -20,7 +20,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <Picker></Picker>
+        <Picker/>
 
         <p>The current time is {currentTime}.</p>
       </header>
