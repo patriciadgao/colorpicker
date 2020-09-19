@@ -3,7 +3,6 @@ import logo from './logo.svg';
 
 
 import './App.css';
-import 'react-color-picker/index.css'
 import Picker from './Picker';
 
 function App() {
