@@ -51,7 +51,7 @@ class Picker extends React.Component {
 
     render() {
       return <div>
-        Hello world!
+        Test words
       </div>
     }
    
