@@ -1,5 +1,4 @@
 import React from 'react';
-import ColorPicker from 'react-color-picker';
 
 // import ScriptTag from 'react-script-tag'
 import '@simonwep/pickr/dist/themes/nano.min.css';      // 'nano' theme
