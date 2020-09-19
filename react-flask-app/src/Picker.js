@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import ScriptTag from 'react-script-tag'
-import '@simonwep/pickr/dist/themes/nano.min.css';      // 'nano' theme
+import '@simonwep/pickr/dist/themes/classic.min.css';      // 'nano' theme
 import Pickr from '@simonwep/pickr';
 
 class Picker extends React.Component {
