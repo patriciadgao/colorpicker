@@ -1,6 +1,4 @@
-import React, { useState, useEffect} from 'react';
-import logo from './logo.svg';
-
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import Picker from './Picker';
@@ -17,10 +15,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <div> Color Picker! <br>
+        </br>Generate a random color, and try your best to match it on the picker! Good luck!
+        </div>
+        <br></br>
 
-        <Picker/>
+        <div>Your Guess:</div>
+        <div id="color-box"></div>
 
-        <p>The current time is {currentTime}.</p>
+        <Picker />
+
       </header>
     </div>
   );

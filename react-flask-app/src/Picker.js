@@ -1,59 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
 
-// import ScriptTag from 'react-script-tag'
-import '@simonwep/pickr/dist/themes/classic.min.css';      // 'nano' theme
-import Pickr from '@simonwep/pickr';
+import { HexColorPicker } from "react-colorful";
+import "react-colorful/dist/index.css";
 
-class Picker extends React.Component {
+function color_meter(cwith, ccolor) {
 
-//     pickr = Pickr.create({
-//         el: '.color-picker',
-//         theme: 'classic', // or 'monolith', or 'nano'
-     
-//         swatches: [
-//             'rgba(244, 67, 54, 1)',
-//             'rgba(233, 30, 99, 0.95)',
-//             'rgba(156, 39, 176, 0.9)',
-//             'rgba(103, 58, 183, 0.85)',
-//             'rgba(63, 81, 181, 0.8)',
-//             'rgba(33, 150, 243, 0.75)',
-//             'rgba(3, 169, 244, 0.7)',
-//             'rgba(0, 188, 212, 0.7)',
-//             'rgba(0, 150, 136, 0.75)',
-//             'rgba(76, 175, 80, 0.8)',
-//             'rgba(139, 195, 74, 0.85)',
-//             'rgba(205, 220, 57, 0.9)',
-//             'rgba(255, 235, 59, 0.95)',
-//             'rgba(255, 193, 7, 1)'
-//         ],
-     
-//         components: {
-     
-//             // Main components
-//             preview: true,
-//             opacity: true,
-//             hue: true,
-     
-//             // Input / output Options
-//             interaction: {
-//                 hex: true,
-//                 rgba: true,
-//                 hsla: true,
-//                 hsva: true,
-//                 cmyk: true,
-//                 input: true,
-//                 clear: true,
-//                 save: true
-//             }
-//         }
-//     });
+  if (!cwith && !ccolor) return;
 
-    render() {
-      return <div>
-        Test words
+  var _cwith = (cwith.charAt(0) == "#") ? cwith.substring(1, 7) : cwith;
+  var _ccolor = (ccolor.charAt(0) == "#") ? ccolor.substring(1, 7) : ccolor;
+
+  var _r = parseInt(_cwith.substring(0, 2), 16);
+  var _g = parseInt(_cwith.substring(2, 4), 16);
+  var _b = parseInt(_cwith.substring(4, 6), 16);
+
+  var __r = parseInt(_ccolor.substring(0, 2), 16);
+  var __g = parseInt(_ccolor.substring(2, 4), 16);
+  var __b = parseInt(_ccolor.substring(4, 6), 16);
+
+  var p1 = (_r / 255) * 100;
+  var p2 = (_g / 255) * 100;
+  var p3 = (_b / 255) * 100;
+
+  var perc1 = Number.parseFloat((p1 + p2 + p3) / 3).toPrecision(5);
+
+  var p1 = (__r / 255) * 100;
+  var p2 = (__g / 255) * 100;
+  var p3 = (__b / 255) * 100;
+
+  var perc2 = Number.parseFloat((p1 + p2 + p3) / 3).toPrecision(5);
+
+  return Number.parseFloat(100 - Math.abs(perc1 - perc2)).toPrecision(5);
+}
+function randomColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function Picker() {
+  const [color, setColor] = useState("#aabbcc");
+  const [score, setScore] = useState("n/a");
+  const [true_color, setTrueColor] = useState(randomColor())
+
+  useEffect(() => {
+    document.getElementById('color-box').style.backgroundColor = color
+    document.body.style.backgroundColor = true_color
+  });
+
+  return (
+    <div>
+      <p>Your Score: {score}</p>
+
+      <Button
+        style={{ margin: '5px' }}
+        onClick={() => setScore(color_meter(true_color, color) + '%')}
+        variant='outlined'
+        color="inherit"
+      >Score Me</Button>
+      <Button
+        style={{ margin: '5px' }}
+        onClick={() => setTrueColor(randomColor())}
+        variant='outlined'
+        color="inherit"
+      >Randomize!</Button>
+
+      <span height="50px"></span>
+      <div style={{ display: "flex", 'justify-content': "center" }}>
+        <HexColorPicker color={color} onChange={setColor} />
       </div>
-    }
-   
-  }
-   
-  export default Picker;
+    </div>
+  );
+}
+
+export default Picker;
